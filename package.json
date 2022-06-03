@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "test": "jest src/utils",
     "postinstall": "flex-plugin pre-script-check"
   },
   "dependencies": {
@@ -13,6 +14,7 @@
   },
   "devDependencies": {
     "@twilio/flex-ui": "^1",
-    "react-test-renderer": "16.13.1"
+    "react-test-renderer": "16.5.2",
+    "jest": "^28.1.0"
   }
 }
