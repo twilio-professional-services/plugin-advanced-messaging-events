@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+<<<<<<< HEAD
     "test": "jest src/util/",
+=======
+    "test": "jest src/utils",
+>>>>>>> 7bb3c99 (Adds helper functions for determining keyMessage and the messageType of a message author)
     "postinstall": "flex-plugin pre-script-check"
   },
   "dependencies": {
@@ -17,10 +21,15 @@
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
     "@twilio/flex-ui": "^1",
+<<<<<<< HEAD
     "babel-jest": "^28.1.0",
     "cheerio": "^1.0.0-rc.3",
     "enzyme": "^3.11.0",
     "jest": "^28.1.0",
     "react-test-renderer": "16.5.2"
+=======
+    "react-test-renderer": "16.5.2",
+    "jest": "^28.1.0"
+>>>>>>> 7bb3c99 (Adds helper functions for determining keyMessage and the messageType of a message author)
   }
 }
