@@ -1,15 +1,12 @@
-import React from "react";
-import { VERSION, Actions } from "@twilio/flex-ui";
-import { FlexPlugin } from "@twilio/flex-plugin";
-import * as ActionsUtil from "./util/actionsUtil.js";
+import React from 'react';
+import { FlexPlugin } from '@twilio/flex-plugin';
 
-import CustomTaskListContainer from "./components/CustomTaskList/CustomTaskList.Container";
-import reducers, { namespace } from "./states";
+import StaleChecker from './components/StaleChecker';
 
 const PLUGIN_NAME = "AdvancedMessagingEventsPlugin";
 
 export default class AdvancedMessagingEventsPlugin extends FlexPlugin {
-  constructor() {
+  constructor () {
     super(PLUGIN_NAME);
   }
 
@@ -21,32 +18,14 @@ export default class AdvancedMessagingEventsPlugin extends FlexPlugin {
    * @param manager { import('@twilio/flex-ui').Manager }
    */
   async init(flex, manager) {
-    this.registerReducers(manager);
 
-    const options = { sortOrder: -1 };
-    flex.AgentDesktopView.Panel1.Content.add(
-      <CustomTaskListContainer key="AdvancedMessagingEventsPlugin-component" />,
-      options
-    );
-
-    ActionsUtil.registerAction("StaleAction");
-    ActionsUtil.registerAction("UrgencyAction");
-  }
-
-  /**
-   * Registers the plugin reducers
-   *
-   * @param manager { Flex.Manager }
-   */
-  registerReducers(manager) {
-    if (!manager.store.addReducer) {
-      // eslint-disable-next-line
-      console.error(
-        `You need FlexUI > 1.9.0 to use built-in redux; you are currently on ${VERSION}`
-      );
-      return;
-    }
-
-    manager.store.addReducer(namespace, reducers);
+    flex.DefaultTaskChannels.Chat.addedComponents = [
+      {
+        target: "TaskListItem",
+        component: <StaleChecker
+          key="StaleChecker"
+        />
+      }
+    ]
   }
 }
