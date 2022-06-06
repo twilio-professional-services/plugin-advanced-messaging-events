@@ -1,19 +1,32 @@
-const getSenderType = require('./getSenderType');
+import isInternalMessage from "./isInternalMessage";
 
 function getKeyMessage(messages, members) {
-    let keyMessage;
+    let storedMessage;
+    let storedMessageIsInternal;
   
+    // loop through the messages in reverse chronological order
     for (let i = messages.length - 1; i >= 0; i--) {
-      let senderType = getSenderType(messages[i], members);
-      if (keyMessage && senderType != keyMessage.senderType) {
+
+      let currentMessage = messages[i];
+
+      // check to see if the message is internal or external
+      let currentMessageIsInternal = isInternalMessage(currentMessage, members);
+
+      // if the internal/external message status is different than the stored message,
+      // the stored message is the key message
+      if (storedMessage && currentMessageIsInternal != storedMessageIsInternal) {
         break;
       }
   
-      keyMessage = messages[i];
-      keyMessage.senderType = senderType;
+      // otherwise, set the stored message to the current message
+      storedMessage = currentMessage;
+
+      // and update the internal message flag
+      storedMessageIsInternal = currentMessageIsInternal;
     }
   
-    return keyMessage;
+    // when the loop breaks, the storedMessage is the keyMessage
+    return storedMessage;
   }
 
-module.exports = getKeyMessage;
+export default getKeyMessage;
