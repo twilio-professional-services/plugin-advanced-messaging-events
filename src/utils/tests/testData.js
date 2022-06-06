@@ -1,7 +1,7 @@
-module.exports = {
+export default {
     memberMap: new Map([
         [
-          "txezLjyJfNanjF1t2Xs3svfOvRGXQRIb",
+          "txe_simulated_author_sid",
           {
             friendlyName: "Customer",
             online: true,
@@ -9,6 +9,7 @@ module.exports = {
               channel: {},
               services: {},
               state: {
+                roleSid: 'RL_simulated_external_role_sid',
                 attributes: {
                   member_type: "guest",
                 },
@@ -25,6 +26,7 @@ module.exports = {
               channel: {},
               services: {},
               state: {
+                roleSid: 'RL_simulated_internal_role_sid',
                 attributes: {
                   member_type: "agent",
                 },
@@ -33,16 +35,56 @@ module.exports = {
           },
         ],
     ]),
+    memberMapNoMemberType: new Map([
+        [
+            "txe_simulated_author_sid",
+            {
+              friendlyName: "Customer",
+              online: true,
+              source: {
+                channel: {},
+                services: {},
+                state: {
+                  attributes: {
+                    
+                  },
+                },
+              },
+            },
+          ],
+          [
+            "authenticatedagent",
+            {
+              friendlyName: "Auth Agent",
+              online: true,
+              source: {
+                channel: {},
+                services: {},
+                state: {
+                  attributes: {
+                    
+                  },
+                },
+              },
+            },
+          ],
+    ]),
+    externalRoleSids: {
+        'RL_simulated_external_role_sid': 'guest',
+        'RL_SIMULATED_CHANNEL_USER_SID': 'channel_user'
+    },
     emptyMessageArray: [],
     singleMessageArray: [
         {
             authorName: "Customer",
             source: {
                 state: {
-                    author: 'txezLjyJfNanjF1t2Xs3svfOvRGXQRIb',
-                    index: '0'
+                    author: 'txe_simulated_author_sid',
+                    index: '0',
+                    sid: 'IM_simulated_message_sid_0'
                 }
-            }
+            },
+            isFromMe: false
         }
     ],
     twoMessagesFromSameUserArray: [
@@ -50,19 +92,23 @@ module.exports = {
             authorName: "Customer",
             source: {
                 state: {
-                    author: 'txezLjyJfNanjF1t2Xs3svfOvRGXQRIb',
-                    index: '0'
+                    author: 'txe_simulated_author_sid',
+                    index: '0',
+                    sid: 'IM_simulated_message_sid_0'
                 }
-            }
+            },
+            isFromMe: false
         },
         {
             authorName: "Customer",
             source: {
                 state: {
-                    author: 'txezLjyJfNanjF1t2Xs3svfOvRGXQRIb',
-                    index: '1'
+                    author: 'txe_simulated_author_sid',
+                    index: '1',
+                    sid: 'IM_simulated_message_sid_1'
                 }
-            }
+            },
+            isFromMe: false
         }
     ],
     backAndForthMessageArray: [
@@ -70,8 +116,55 @@ module.exports = {
             authorName: "Customer",
             source: {
                 state: {
-                    author: 'txezLjyJfNanjF1t2Xs3svfOvRGXQRIb',
-                    index: '0'
+                    author: 'txe_simulated_author_sid',
+                    index: '0',
+                    sid: 'IM_simulated_message_sid_0'
+                }
+            },
+            isFromMe: false
+        },
+        {
+            authorName: "Agent",
+            source: {
+                state: {
+                    author: 'authenticatedagent',
+                    index: '1',
+                    sid: 'IM_simulated_message_sid_1'
+                }
+            },
+            isFromMe: true
+        },
+        {
+            authorName: "Customer",
+            source: {
+                state: {
+                    author: 'txe_simulated_author_sid',
+                    index: '2',
+                    sid: 'IM_simulated_message_sid_2'
+                }
+            },
+            isFromMe: false
+        },
+        {
+            authorName: "Agent",
+            source: {
+                state: {
+                    author: 'authenticatedagent',
+                    index: '3',
+                    sid: 'IM_simulated_message_sid_3'
+                }
+            },
+            isFromMe: true
+        }
+    ],
+    backAndForthMessageArrayNoIsFromMe: [
+        {
+            authorName: "Customer",
+            source: {
+                state: {
+                    author: 'txe_simulated_author_sid',
+                    index: '0',
+                    sid: 'IM_simulated_message_sid_0'
                 }
             }
         },
@@ -80,7 +173,8 @@ module.exports = {
             source: {
                 state: {
                     author: 'authenticatedagent',
-                    index: '1'
+                    index: '1',
+                    sid: 'IM_simulated_message_sid_1'
                 }
             }
         },
@@ -88,8 +182,9 @@ module.exports = {
             authorName: "Customer",
             source: {
                 state: {
-                    author: 'txezLjyJfNanjF1t2Xs3svfOvRGXQRIb',
-                    index: '2'
+                    author: 'txe_simulated_author_sid',
+                    index: '2',
+                    sid: 'IM_simulated_message_sid_2'
                 }
             }
         },
@@ -98,7 +193,8 @@ module.exports = {
             source: {
                 state: {
                     author: 'authenticatedagent',
-                    index: '3'
+                    index: '3',
+                    sid: 'IM_simulated_message_sid_3'
                 }
             }
         }
