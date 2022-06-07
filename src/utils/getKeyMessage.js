@@ -26,7 +26,10 @@ function getKeyMessage(messages, members) {
     }
   
     // when the loop breaks, the storedMessage is the keyMessage
-    return storedMessage;
+    return {
+      keyMessage: storedMessage,
+      isInternal: storedMessageIsInternal
+    };
   }
 
 export default getKeyMessage;

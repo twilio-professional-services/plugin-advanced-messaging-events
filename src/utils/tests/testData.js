@@ -35,46 +35,12 @@ export default {
           },
         ],
     ]),
-    memberMapNoMemberType: new Map([
-        [
-            "txe_simulated_author_sid",
-            {
-              friendlyName: "Customer",
-              online: true,
-              source: {
-                channel: {},
-                services: {},
-                state: {
-                  attributes: {
-                    
-                  },
-                },
-              },
-            },
-          ],
-          [
-            "authenticatedagent",
-            {
-              friendlyName: "Auth Agent",
-              online: true,
-              source: {
-                channel: {},
-                services: {},
-                state: {
-                  attributes: {
-                    
-                  },
-                },
-              },
-            },
-          ],
-    ]),
     externalRoleSids: {
         'RL_simulated_external_role_sid': 'guest',
         'RL_SIMULATED_CHANNEL_USER_SID': 'channel_user'
     },
     emptyMessageArray: [],
-    singleMessageArray: [
+    singleCustomerMessageArray: [
         {
             authorName: "Customer",
             source: {
@@ -87,7 +53,20 @@ export default {
             isFromMe: false
         }
     ],
-    twoMessagesFromSameUserArray: [
+    singleAgentMessageArray: [
+        {
+            authorName: "Agent",
+            source: {
+                state: {
+                    author: 'authenticatedagent',
+                    index: '0',
+                    sid: 'IM_simulated_message_sid_0'
+                }
+            },
+            isFromMe: true
+        }
+    ],
+    twoCustomerMessagesArray: [
         {
             authorName: "Customer",
             source: {
@@ -111,7 +90,29 @@ export default {
             isFromMe: false
         }
     ],
-    backAndForthMessageArray: [
+    twoAgentMessagesArray: [
+        {
+            authorName: "Agent",
+            source: {
+                state: {
+                    author: 'authenticatedagent',
+                    index: '0',
+                    sid: 'IM_simulated_message_sid_0'
+                }
+            }
+        },
+        {
+            authorName: "Agent",
+            source: {
+                state: {
+                    author: 'authenticatedagent',
+                    index: '1',
+                    sid: 'IM_simulated_message_sid_1'
+                }
+            }
+        }
+    ],
+    backAndForthEndingWithAgentMessageArray: [
         {
             authorName: "Customer",
             source: {
