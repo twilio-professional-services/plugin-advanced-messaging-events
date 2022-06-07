@@ -31,14 +31,6 @@ export default class AdvancedMessagingEventsPlugin extends FlexPlugin {
 
     ActionsUtil.registerAction("StaleAction");
     ActionsUtil.registerAction("UrgencyAction");
-
-    Actions.addListener("afterStaleAction", () => {
-      // Add your custom action code here
-    });
-
-    Actions.addListener("afterUrgencyAction", () => {
-      // Add your custom action code here
-    });
   }
 
   /**
