@@ -1,7 +1,7 @@
-import React from 'react';
 import { FlexPlugin } from '@twilio/flex-plugin';
 
-import StaleChecker from './components/StaleChecker';
+
+import CustomizeFlexActions from './flex-hooks/actions';
 
 const PLUGIN_NAME = "AdvancedMessagingEventsPlugin";
 
@@ -19,13 +19,13 @@ export default class AdvancedMessagingEventsPlugin extends FlexPlugin {
    */
   async init(flex, manager) {
 
-    flex.DefaultTaskChannels.Chat.addedComponents = [
-      {
-        target: "TaskListItem",
-        component: <StaleChecker
-          key="StaleChecker"
-        />
-      }
-    ]
+    const initializers = [
+      CustomizeFlexActions,
+      CustomizeFlexComponents,
+    ];
+
+    initializers.forEach((initializer) => initializer(flex, manager));
+
+
   }
 }

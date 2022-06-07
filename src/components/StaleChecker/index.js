@@ -24,14 +24,11 @@ const modes = {
 function StaleChecker(props) {
 
     const [chatMode, setChatMode] = useState(modes.DEFAULT_MODE);
-    console.log("StaleChecker props", props)
-
 
     function getKeyMessage(channel) {
         return {
-            author: "",
-            message: "",
-            timestamp: "",
+            keyMessage: {},
+            isInternal: true
         }
     }
 
@@ -69,12 +66,11 @@ function StaleChecker(props) {
     // if none conditions matched, return DefaultMode
     function checkMode(message) {
         const now = new Date().getTime();
-        const messageTime = new Date(message.timestamp).getTime()
-        const lastAuthor = message.author;
+        const messageTime = new Date(message.source.state.timestamp).getTime()
         const timeSinceLastMessage = now - messageTime;
 
 
-        if (lastAuthor === 'agent') {
+        if (message.isInternal) {
             if (timeSinceLastMessage > modes.URGENCY_MODE.timerThreshold) {
                 return modes.URGENCY_MODE
             }
