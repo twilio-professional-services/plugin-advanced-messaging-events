@@ -1,11 +1,12 @@
-import React from 'react';
-import { VERSION } from '@twilio/flex-ui';
-import { FlexPlugin } from '@twilio/flex-plugin';
+import React from "react";
+import { VERSION, Actions } from "@twilio/flex-ui";
+import { FlexPlugin } from "@twilio/flex-plugin";
+import * as ActionsUtil from "./util/actionsUtil.js";
 
-import CustomTaskListContainer from './components/CustomTaskList/CustomTaskList.Container';
-import reducers, { namespace } from './states';
+import CustomTaskListContainer from "./components/CustomTaskList/CustomTaskList.Container";
+import reducers, { namespace } from "./states";
 
-const PLUGIN_NAME = 'AdvancedMessagingEventsPlugin';
+const PLUGIN_NAME = "AdvancedMessagingEventsPlugin";
 
 export default class AdvancedMessagingEventsPlugin extends FlexPlugin {
   constructor() {
@@ -23,7 +24,13 @@ export default class AdvancedMessagingEventsPlugin extends FlexPlugin {
     this.registerReducers(manager);
 
     const options = { sortOrder: -1 };
-    flex.AgentDesktopView.Panel1.Content.add(<CustomTaskListContainer key="AdvancedMessagingEventsPlugin-component" />, options);
+    flex.AgentDesktopView.Panel1.Content.add(
+      <CustomTaskListContainer key="AdvancedMessagingEventsPlugin-component" />,
+      options
+    );
+
+    ActionsUtil.registerAction("StaleAction");
+    ActionsUtil.registerAction("UrgencyAction");
   }
 
   /**
@@ -34,7 +41,9 @@ export default class AdvancedMessagingEventsPlugin extends FlexPlugin {
   registerReducers(manager) {
     if (!manager.store.addReducer) {
       // eslint-disable-next-line
-      console.error(`You need FlexUI > 1.9.0 to use built-in redux; you are currently on ${VERSION}`);
+      console.error(
+        `You need FlexUI > 1.9.0 to use built-in redux; you are currently on ${VERSION}`
+      );
       return;
     }
 
