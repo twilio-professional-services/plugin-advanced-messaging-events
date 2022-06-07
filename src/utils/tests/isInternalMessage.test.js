@@ -4,8 +4,7 @@ import testData from './testData'
 test('no message', () => {
   expect(
     isInternalMessage(
-      {},
-      testData.memberMap
+      {}
     )
   ).toBe(undefined);
 })
@@ -66,7 +65,7 @@ test ('internal message fallback to isFromMe', () => {
 
   expect(
     isInternalMessage(
-      testData.backAndForthMessageArray[1],
+      testData.backAndForthEndingWithAgentMessageArray[1],
       testData.memberMap
     )
   ).toBe(true)
@@ -78,7 +77,7 @@ test ('external message fallback to isFromMe', () => {
 
   expect(
     isInternalMessage(
-      testData.backAndForthMessageArray[0],
+      testData.backAndForthEndingWithAgentMessageArray[0],
       testData.memberMap
     )
   ).toBe(false)
