@@ -27,7 +27,11 @@ function StaleChecker(props) {
 
     function getKeyMessage(channel) {
         return {
-            keyMessage: {},
+            keyMessage: {
+                source: {
+                    timestamp: "2022-06-08T19:09:01.937Z"
+                }
+            },
             isInternal: true
         }
     }
@@ -36,24 +40,26 @@ function StaleChecker(props) {
     // useEffect with [] param should behave as ComponentDidMount
     // Here we start a loop to get the key message and check the current mode. At the end we only update the React State if the mode has changed
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
+            verifyChatMode()
+        }, 2000);
+
+        return () => clearInterval(interval);
+    }, [])
+
+    function verifyChatMode() {
+        if (props.chatChannel) {
             const keyMessage = getKeyMessage(props.chatChannel.messages, props.chatChannel.members)
 
             const currentMode = checkMode(keyMessage);
 
-            if (chatMode != currentMode) {
-                setChatMode(currentMode)
-            }
-
-        }, 1000);
-    }, [])
-
+            setChatMode(currentMode)
+        }
+    }
 
     // useEffect with [chatMode] param should behave as ComponentDidUpdate, but should run only if chatMode have been updated
     // Here we check if the new Mode is not the Default, since only Urgent and Stale mode should fire an Action
     useEffect(() => {
-        console.log("StaleChecker update")
-
         if (chatMode.name != DEFAULT_MODE) {
             Flex.Actions.invokeAction(chatMode.actionName, { task: props.task, channel: props.chatChannel })
         }
@@ -64,18 +70,17 @@ function StaleChecker(props) {
     // Get the message timestamp and compare with the current timestamp
     // Check if the threshold have been reached for both cases (agent and customer)
     // if none conditions matched, return DefaultMode
-    function checkMode(message) {
+    function checkMode({ keyMessage, isInternal }) {
         const now = new Date().getTime();
-        const messageTime = new Date(message.source.state.timestamp).getTime()
-        const timeSinceLastMessage = now - messageTime;
+        const messageTime = new Date(keyMessage.source.timestamp).getTime()
+        const timeSinceKeyMessage = now - messageTime;
 
-
-        if (message.isInternal) {
-            if (timeSinceLastMessage > modes.URGENCY_MODE.timerThreshold) {
+        if (isInternal) {
+            if (timeSinceKeyMessage > modes.URGENCY_MODE.timerThreshold) {
                 return modes.URGENCY_MODE
             }
         } else {
-            if (timeSinceLastMessage > modes.STALE_MODE.timerThreshold) {
+            if (timeSinceKeyMessage > modes.STALE_MODE.timerThreshold) {
                 return modes.STALE_MODE
             }
         }
@@ -83,8 +88,6 @@ function StaleChecker(props) {
         return modes.DEFAULT_MODE;
 
     }
-
-
 
     return (<div />);
 }
