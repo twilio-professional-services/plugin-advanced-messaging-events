@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "jest src/utils",
+    "test": "jest src/util",
     "postinstall": "flex-plugin pre-script-check"
   },
   "dependencies": {
