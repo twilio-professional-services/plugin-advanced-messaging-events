@@ -3,7 +3,7 @@ require('dotenv').config();
 import stringIsFound from './stringIsFound';
 
 // Determines if a message is from an internal (agent) or external (customer) source
-function isInternalMessage(message, members, config = {}) {
+function isCustomerMessage(message, members, config = {}) {
 
   // check that there is a message/author
   let author = message?.source?.state?.author;
@@ -30,16 +30,16 @@ function isInternalMessage(message, members, config = {}) {
   // check optional customerRoleSids to see if the author sid
   // corresponds to an external role
   if (stringIsFound(authorRoleSid, config.customerRoleSids)) {
-    return false;
+    return true;
   }
 
   // fallback again to `isFromMe` if `member_type` is undefined
   if (message.isFromMe != undefined){
-    return message.isFromMe
+    return !message.isFromMe
   }
 
   // default to assuming the message is internal
-  return true;
+  return false;
 }
 
-export default isInternalMessage;
+export default isCustomerMessage;

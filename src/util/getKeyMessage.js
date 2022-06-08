@@ -1,8 +1,8 @@
-import isInternalMessage from "./isInternalMessage";
+import isCustomerMessage from "./isCustomerMessage";
 
 function getKeyMessage(messages, members) {
     let storedMessage;
-    let storedMessageIsInternal;
+    let storedMessageIsFromCustomer;
   
     // loop through the messages in reverse chronological order
     for (let i = messages.length - 1; i >= 0; i--) {
@@ -10,11 +10,11 @@ function getKeyMessage(messages, members) {
       let currentMessage = messages[i];
 
       // check to see if the message is internal or external
-      let currentMessageIsInternal = isInternalMessage(currentMessage, members);
+      let currentMessageIsFromCustomer = isCustomerMessage(currentMessage, members);
 
       // if the internal/external message status is different than the stored message,
       // the stored message is the key message
-      if (storedMessage && currentMessageIsInternal != storedMessageIsInternal) {
+      if (storedMessage && currentMessageIsFromCustomer != storedMessageIsFromCustomer) {
         break;
       }
   
@@ -22,13 +22,13 @@ function getKeyMessage(messages, members) {
       storedMessage = currentMessage;
 
       // and update the internal message flag
-      storedMessageIsInternal = currentMessageIsInternal;
+      storedMessageIsFromCustomer = currentMessageIsFromCustomer;
     }
   
     // when the loop breaks, the storedMessage is the keyMessage
     return {
       keyMessage: storedMessage,
-      isInternal: storedMessageIsInternal
+      isFromCustomer: storedMessageIsFromCustomer
     };
   }
 
