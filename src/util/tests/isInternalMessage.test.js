@@ -11,7 +11,7 @@ test('no message', () => {
 
 test ('internal message with external role sid set in .env', () => {
 
-  process.env.EXTERNAL_ROLE_SIDS = JSON.stringify(testData.externalRoleSids);
+  process.env.CUSTOMER_ROLE_SIDS = testData.customerRoleSidsString;
 
   expect(
     isInternalMessage(
@@ -23,7 +23,7 @@ test ('internal message with external role sid set in .env', () => {
 
 test ('external message with external role sid set in .env', () => {
 
-  process.env.EXTERNAL_ROLE_SIDS = JSON.stringify(testData.externalRoleSids);
+  process.env.CUSTOMER_ROLE_SIDS = testData.customerRoleSidsString;
 
   expect(
     isInternalMessage(
@@ -35,33 +35,33 @@ test ('external message with external role sid set in .env', () => {
 
 test ('internal message with external role sid in the config', () => {
 
-  delete process.env.EXTERNAL_ROLE_SIDS;
+  delete process.env.CUSTOMER_ROLE_SIDS;
 
   expect(
     isInternalMessage(
       testData.backAndForthMessageArrayNoIsFromMe[1],
       testData.memberMap,
-      {externalRoleSids: testData.externalRoleSids}
+      {customerRoleSids: testData.customerRoleSidsString}
     )
   ).toBe(true)
 })
 
 test ('external message with external role sid in the config', () => {
 
-  delete process.env.EXTERNAL_ROLE_SIDS;
+  delete process.env.CUSTOMER_ROLE_SIDS;
 
   expect(
     isInternalMessage(
       testData.backAndForthMessageArrayNoIsFromMe[0],
       testData.memberMap,
-      {externalRoleSids: testData.externalRoleSids}
+      {customerRoleSids: testData.customerRoleSidsString}
     )
   ).toBe(false)
 })
 
 test ('internal message fallback to isFromMe', () => {
 
-  delete process.env.EXTERNAL_ROLE_SIDS;
+  delete process.env.CUSTOMER_ROLE_SIDS;
 
   expect(
     isInternalMessage(
@@ -73,7 +73,7 @@ test ('internal message fallback to isFromMe', () => {
 
 test ('external message fallback to isFromMe', () => {
 
-  delete process.env.EXTERNAL_ROLE_SIDS;
+  delete process.env.CUSTOMER_ROLE_SIDS;
 
   expect(
     isInternalMessage(
