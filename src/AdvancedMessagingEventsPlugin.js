@@ -1,7 +1,8 @@
 import { FlexPlugin } from '@twilio/flex-plugin';
 
 
-import CustomizeFlexActions from './flex-hooks/actions';
+import CustomizeFlexActions from './flex-hooks/Actions';
+import CustomizeFlexComponents from './flex-hooks/Components';
 
 const PLUGIN_NAME = "AdvancedMessagingEventsPlugin";
 
