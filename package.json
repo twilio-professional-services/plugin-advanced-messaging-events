@@ -3,16 +3,21 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "test": "jest src/util",
     "postinstall": "flex-plugin pre-script-check"
   },
   "dependencies": {
     "@twilio/flex-plugin-scripts": "5.1.0",
+    "dotenv": "^16.0.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-emotion": "9.2.12"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
     "@twilio/flex-ui": "^1",
-    "react-test-renderer": "16.13.1"
+    "react-test-renderer": "16.13.1",
+    "jest": "^28.1.0"
   }
 }
