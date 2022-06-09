@@ -3,11 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-<<<<<<< HEAD
     "test": "jest src/util/",
+<<<<<<< HEAD
 =======
     "test": "jest src/utils",
 >>>>>>> 7bb3c99 (Adds helper functions for determining keyMessage and the messageType of a message author)
+=======
+>>>>>>> a6792f8 (Resolves merge conflict artifacts in package.json and .env.sample)
     "postinstall": "flex-plugin pre-script-check"
   },
   "dependencies": {
