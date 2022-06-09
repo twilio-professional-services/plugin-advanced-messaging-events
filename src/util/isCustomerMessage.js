@@ -11,8 +11,6 @@ function isCustomerMessage(message, members, config = {}) {
     return undefined;
   }
 
-  let customerRoleSids = config.customerRoleSids;
-  
   // pull external role sids from .env. try parsing as JSON, if that doesn't work,
   // load it as a regular string.
   if (process.env.CUSTOMER_ROLE_SIDS) {
