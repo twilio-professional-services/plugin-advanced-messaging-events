@@ -31,7 +31,7 @@ function isCustomerMessage(message, members, config = {}) {
     }
 
     // pull the message author's roleSid from the members map
-    let authorRoleSid = members.get(author).source.state.roleSid;
+    let authorRoleSid = members.get(author)?.source?.state?.roleSid;
 
     // check customerRoleSids to see if the author sid
     // corresponds to an external role
