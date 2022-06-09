@@ -64,16 +64,17 @@ function StaleChecker(props) {
     function checkMode({ keyMessage, isFromCustomer }) {
         const now = new Date().getTime();
         const messageTime = new Date(keyMessage.source.timestamp).getTime()
-        const timeSinceKeyMessage = Math.floor((now - messageTime) / 60000);
+        const minutesSinceKeyMessage = Math.floor((now - messageTime) / 60000);
 
-        if (!isFromCustomer) {
-            if (timeSinceKeyMessage > modes.URGENCY_MODE.timerThreshold) {
-                return modes.URGENCY_MODE
-            }
-        } else {
-            if (timeSinceKeyMessage > modes.STALE_MODE.timerThreshold) {
+        if (isFromCustomer) {
+            if (minutesSinceKeyMessage > modes.STALE_MODE.timerThreshold) {
                 return modes.STALE_MODE
             }
+        } else {
+            if (minutesSinceKeyMessage > modes.URGENCY_MODE.timerThreshold) {
+                return modes.URGENCY_MODE
+            }
+
         }
 
         return modes.DEFAULT_MODE;
