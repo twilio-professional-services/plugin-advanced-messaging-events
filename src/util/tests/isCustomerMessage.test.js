@@ -11,7 +11,7 @@ test('no message', () => {
 
 test ('internal message with external role sid set in .env', () => {
 
-  process.env.CUSTOMER_ROLE_SIDS = testData.customerRoleSidsString;
+  process.env.CUSTOMER_ROLE_SIDS = testData.customerRoleSidsEnvArr;
 
   expect(
     isCustomerMessage(
@@ -23,7 +23,7 @@ test ('internal message with external role sid set in .env', () => {
 
 test ('external message with external role sid set in .env', () => {
 
-  process.env.CUSTOMER_ROLE_SIDS = testData.customerRoleSidsString;
+  process.env.CUSTOMER_ROLE_SIDS = testData.customerRoleSidsEnvArr;
 
   expect(
     isCustomerMessage(
@@ -41,12 +41,25 @@ test ('internal message with external role sid in the config', () => {
     isCustomerMessage(
       testData.backAndForthMessageArrayNoIsFromMe[1],
       testData.memberMap,
-      {customerRoleSids: testData.customerRoleSidsString}
+      {customerRoleSids: [testData.customerRoleSidsString]}
     )
   ).toBe(false)
 })
 
-test ('external message with external role sid in the config', () => {
+test ('external message with external role sid in the config (arr)', () => {
+
+  delete process.env.CUSTOMER_ROLE_SIDS;
+
+  expect(
+    isCustomerMessage(
+      testData.backAndForthMessageArrayNoIsFromMe[0],
+      testData.memberMap,
+      {customerRoleSids: [testData.customerRoleSidsString]}
+    )
+  ).toBe(true)
+})
+
+test ('external message with external role sid in the config (str)', () => {
 
   delete process.env.CUSTOMER_ROLE_SIDS;
 
@@ -65,8 +78,7 @@ test ('internal message fallback to isFromMe', () => {
 
   expect(
     isCustomerMessage(
-      testData.backAndForthEndingWithAgentMessageArray[1],
-      testData.memberMap
+      testData.backAndForthEndingWithAgentMessageArray[1]
     )
   ).toBe(false)
 })
@@ -77,8 +89,7 @@ test ('external message fallback to isFromMe', () => {
 
   expect(
     isCustomerMessage(
-      testData.backAndForthEndingWithAgentMessageArray[0],
-      testData.memberMap
+      testData.backAndForthEndingWithAgentMessageArray[0]
     )
   ).toBe(true)
 })

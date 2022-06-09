@@ -39,7 +39,7 @@ export default {
         'RL_simulated_external_role_sid': 'guest',
         'RL_SIMULATED_CHANNEL_USER_SID': 'channel_user'
     },
-    customerRoleSidsArr: ['RL_simulated_external_role_sid'],
+    customerRoleSidsEnvArr: '["RL_simulated_external_role_sid"]',
     customerRoleSidsString: 'RL_simulated_external_role_sid',
     emptyMessageArray: [],
     singleCustomerMessageArray: [

@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-import stringIsFound from './stringIsFound';
+import convertEnvStringToArray from './convertEnvStringToArray';
 
 // Determines if a message is from an internal (agent) or external (customer) source
 function isCustomerMessage(message, members, config = {}) {
@@ -11,24 +11,33 @@ function isCustomerMessage(message, members, config = {}) {
     return undefined;
   }
 
-  // pull external role sids from .env. try parsing as JSON, if that doesn't work,
-  // load it as a regular string.
-  if (process.env.CUSTOMER_ROLE_SIDS) {
-    try {
-      config.customerRoleSids = JSON.parse(process.env.CUSTOMER_ROLE_SIDS)
-    }
-    catch (e) {
-      config.customerRoleSids = process.env.CUSTOMER_ROLE_SIDS;
-    }
-  }
+  // if there is a MemberMap provided, look at the roleSid to see if it corresponds
+  // to a customer role
+  if (members instanceof Map) {
+    let customerRoleSids = [];
 
-  // pull the message author's roleSid from the members map
-  let authorRoleSid = members.get(author).source.state.roleSid;
+    // pull strings/arrays of customerRoleSids from the config object
+    if (config.customerRoleSids) {
+      if (Array.isArray(config.customerRoleSids)) {
+        customerRoleSids.push(...config.customerRoleSids);
+      } else {
+        customerRoleSids.push(config.customerRoleSids);
+      }
+    }
 
-  // check optional customerRoleSids to see if the author sid
-  // corresponds to an external role
-  if (stringIsFound(authorRoleSid, config.customerRoleSids)) {
-    return true;
+    // pull external role sids from .env.
+    if (process.env.CUSTOMER_ROLE_SIDS) {
+      customerRoleSids.push(...convertEnvStringToArray(process.env.CUSTOMER_ROLE_SIDS))
+    }
+
+    // pull the message author's roleSid from the members map
+    let authorRoleSid = members.get(author).source.state.roleSid;
+
+    // check customerRoleSids to see if the author sid
+    // corresponds to an external role
+    if (customerRoleSids.includes(authorRoleSid)) {
+      return true;
+    }
   }
 
   // fallback again to `isFromMe` if `member_type` is undefined
