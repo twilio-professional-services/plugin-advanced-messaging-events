@@ -1,10 +1,6 @@
-import * as Flex from '@twilio/flex-ui';
+import { SilentActionHandler } from "../../util/actionsUtil";
 
 export default (flex, manager) => {
-    flex.Actions.registerAction("UrgencyMode", (payload) => {
-        alert("UrgentMode ")
-    })
-    flex.Actions.registerAction("StaleMode", (payload) => {
-        alert("StaleMode")
-    })
+    flex.Actions.registerAction("UrgencyMode", SilentActionHandler);
+    flex.Actions.registerAction("StaleMode", SilentActionHandler);
 }
