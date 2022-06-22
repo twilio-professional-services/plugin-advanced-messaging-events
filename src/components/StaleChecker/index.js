@@ -67,12 +67,12 @@ function StaleChecker(props) {
         const minutesSinceKeyMessage = Math.floor((now - messageTime) / 60000);
 
         if (isFromCustomer) {
-            if (minutesSinceKeyMessage > modes.STALE_MODE.timerThreshold) {
-                return modes.STALE_MODE
-            }
-        } else {
             if (minutesSinceKeyMessage > modes.URGENCY_MODE.timerThreshold) {
                 return modes.URGENCY_MODE
+            }
+        } else {
+            if (minutesSinceKeyMessage > modes.STALE_MODE.timerThreshold) {
+                return modes.STALE_MODE
             }
 
         }
