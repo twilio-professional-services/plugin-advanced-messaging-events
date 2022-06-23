@@ -19,5 +19,8 @@ jobs:
       with:
         node-version: 14
     
+    - name: Install Twilio CLI
+      run: npm install -g twilio-cli && twilio plugins:install @twilio-labs/plugin-flex@5.1.0
+    
     - name: Install and run tests
       run: npm install-ci-test
