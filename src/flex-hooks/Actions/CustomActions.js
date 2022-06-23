@@ -1,10 +1,11 @@
 import { SilentActionHandler } from "../../util/actionsUtil";
+import { ActionName } from '../../enums';
 
 export default (flex, manager) => {
-    flex.Actions.registerAction("UrgencyMode", (payload) => {
-        SilentActionHandler({ ...payload, action: "UrgencyMode" })
+    flex.Actions.registerAction(ActionName.urgency, (payload) => {
+        SilentActionHandler({ ...payload, action: ActionName.urgency })
     });
-    flex.Actions.registerAction("StaleMode", (payload) => {
-        SilentActionHandler({ ...payload, action: "StaleMode" })
+    flex.Actions.registerAction(ActionName.stale, (payload) => {
+        SilentActionHandler({ ...payload, action: ActionName.stale })
     });
 }
