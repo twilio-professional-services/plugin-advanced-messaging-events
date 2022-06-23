@@ -19,8 +19,5 @@ jobs:
       with:
         node-version: 14
     
-    - name: Install modules
-      run: npm install
-    
-    - name: Run tests
-      run: npm test
+    - name: Install and run tests
+      run: npm install-ci-test
