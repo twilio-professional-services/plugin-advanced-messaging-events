@@ -1,9 +1,7 @@
-require('dotenv').config();
-
-import convertEnvStringToArray from './convertEnvStringToArray';
+import { convertEnvStringToArray } from './convertEnvStringToArray';
 
 // Determines if a message is from an internal (agent) or external (customer) source
-function isCustomerMessage(message, members, config = {}) {
+export const isCustomerMessage = (message, members, config = {}) => {
 
   // check that there is a message/author
   let author = message?.source?.state?.author;
@@ -26,8 +24,8 @@ function isCustomerMessage(message, members, config = {}) {
     }
 
     // pull external role sids from .env.
-    if (process.env.CUSTOMER_ROLE_SIDS) {
-      customerRoleSids.push(...convertEnvStringToArray(process.env.CUSTOMER_ROLE_SIDS))
+    if (process.env.FLEX_APP_CUSTOMER_ROLE_SIDS) {
+      customerRoleSids.push(...convertEnvStringToArray(process.env.FLEX_APP_CUSTOMER_ROLE_SIDS))
     }
 
     // pull the message author's roleSid from the members map
@@ -48,5 +46,3 @@ function isCustomerMessage(message, members, config = {}) {
   // default to assuming the message is internal
   return false;
 }
-
-export default isCustomerMessage;

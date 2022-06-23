@@ -1,6 +1,6 @@
 // takes a string from an environment variable (string or a JSON encoded object)
 // and returns an array of strings
-function convertEnvStringToArray(str) {
+export const convertEnvStringToArray = (str) => {
     if (!str) {
         return undefined;
     }
@@ -31,5 +31,3 @@ function convertEnvStringToArray(str) {
         return [str]
     }
 }
-
-export default convertEnvStringToArray
