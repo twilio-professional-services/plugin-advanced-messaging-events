@@ -1,4 +1,4 @@
-import convertEnvStringToArray from "../convertEnvStringToArray";
+import { convertEnvStringToArray } from "../convertEnvStringToArray";
 
 test('no string', () => {
     expect(

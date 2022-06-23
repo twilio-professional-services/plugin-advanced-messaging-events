@@ -1,4 +1,4 @@
-import getKeyMessage from '../getKeyMessage';
+import { getKeyMessage } from '../getKeyMessage';
 import testData from './testData';
 
 test ('no message', () => {

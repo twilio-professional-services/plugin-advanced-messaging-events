@@ -1,4 +1,4 @@
-import isCustomerMessage from '../isCustomerMessage';
+import { isCustomerMessage } from '../isCustomerMessage';
 import testData from './testData'
 
 test('no message', () => {
@@ -11,7 +11,7 @@ test('no message', () => {
 
 test ('internal message with external role sid set in .env', () => {
 
-  process.env.CUSTOMER_ROLE_SIDS = testData.customerRoleSidsEnvArr;
+  process.env.FLEX_APP_CUSTOMER_ROLE_SIDS = testData.customerRoleSidsEnvArr;
 
   expect(
     isCustomerMessage(
@@ -23,7 +23,7 @@ test ('internal message with external role sid set in .env', () => {
 
 test ('external message with external role sid set in .env', () => {
 
-  process.env.CUSTOMER_ROLE_SIDS = testData.customerRoleSidsEnvArr;
+  process.env.FLEX_APP_CUSTOMER_ROLE_SIDS = testData.customerRoleSidsEnvArr;
 
   expect(
     isCustomerMessage(
@@ -35,7 +35,7 @@ test ('external message with external role sid set in .env', () => {
 
 test ('internal message with external role sid in the config', () => {
 
-  delete process.env.CUSTOMER_ROLE_SIDS;
+  delete process.env.FLEX_APP_CUSTOMER_ROLE_SIDS;
 
   expect(
     isCustomerMessage(
@@ -48,7 +48,7 @@ test ('internal message with external role sid in the config', () => {
 
 test ('external message with external role sid in the config (arr)', () => {
 
-  delete process.env.CUSTOMER_ROLE_SIDS;
+  delete process.env.FLEX_APP_CUSTOMER_ROLE_SIDS;
 
   expect(
     isCustomerMessage(
@@ -61,7 +61,7 @@ test ('external message with external role sid in the config (arr)', () => {
 
 test ('external message with external role sid in the config (str)', () => {
 
-  delete process.env.CUSTOMER_ROLE_SIDS;
+  delete process.env.FLEX_APP_CUSTOMER_ROLE_SIDS;
 
   expect(
     isCustomerMessage(
@@ -74,7 +74,7 @@ test ('external message with external role sid in the config (str)', () => {
 
 test ('internal message fallback to isFromMe', () => {
 
-  delete process.env.CUSTOMER_ROLE_SIDS;
+  delete process.env.FLEX_APP_CUSTOMER_ROLE_SIDS;
 
   expect(
     isCustomerMessage(
@@ -85,7 +85,7 @@ test ('internal message fallback to isFromMe', () => {
 
 test ('external message fallback to isFromMe', () => {
 
-  delete process.env.CUSTOMER_ROLE_SIDS;
+  delete process.env.FLEX_APP_CUSTOMER_ROLE_SIDS;
 
   expect(
     isCustomerMessage(
