@@ -5,7 +5,7 @@ import { getKeyMessage } from '../../util/getKeyMessage';
 import { modeConfig } from '../../util/modeConfig';
 import { ChatMode } from '../../enums';
 
-function StaleChecker(props) {
+function AdvancedMessagingEvents(props) {
     const [chatMode, setChatMode] = useState(ChatMode.default);
     const [clock, setClock] = useState(true);
 
@@ -42,4 +42,4 @@ function StaleChecker(props) {
     return (<div />);
 }
 
-export default StaleChecker;
+export default AdvancedMessagingEvents;

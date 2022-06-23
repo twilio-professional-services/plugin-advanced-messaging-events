@@ -1,11 +1,11 @@
-import StaleChecker from "../../components/StaleChecker"
+import AdvancedMessagingEvents from "../../components/AdvancedMessagingEvents"
 
 export default (flex, manager) => {
     flex.DefaultTaskChannels.Chat.addedComponents = [
         {
             target: "TaskListItem",
-            component: <StaleChecker
-                key="StaleChecker"
+            component: <AdvancedMessagingEvents
+                key="AdvancedMessagingEvents"
             />
         }
     ]
