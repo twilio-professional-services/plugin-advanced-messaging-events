@@ -41,6 +41,8 @@ export default {
     },
     customerRoleSidsEnvArr: '["RL_simulated_external_role_sid"]',
     customerRoleSidsString: 'RL_simulated_external_role_sid',
+    staleThresholdSeconds: 5,
+    urgencyThresholdSeconds: 3,
     emptyMessageArray: [],
     singleCustomerMessageArray: [
         {
