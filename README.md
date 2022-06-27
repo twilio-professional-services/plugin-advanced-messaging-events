@@ -1,8 +1,8 @@
-# Your custom Twilio Flex Plugin
+# Advanced Messaging Events Flex Plugin
 
-Twilio Flex Plugins allow you to customize the appearance and behavior of [Twilio Flex](https://www.twilio.com/flex). If you want to learn more about the capabilities and how to use the API, check out our [Flex documentation](https://www.twilio.com/docs/flex).
+This plugin exposes actions which can be used to trigger functionality when it has been some time since the last chat message in a chat conversation. `StaleAction` is emitted when the most recent message was from an agent; `UrgencyAction` is emitted when the most recent message was from the customer. The threshold (time since last message) for a chat to be considered stale or urgent are configurable, as well as the role SID(s) representing the customer.
 
-## Setup
+## Installation
 
 First, copy `.env.sample` to `.env` and make modifications per the instructions in that file.
 
@@ -27,18 +27,35 @@ Finally, install the [Flex Plugin extension](https://github.com/twilio-labs/plug
 twilio plugins:install @twilio-labs/plugin-flex
 ```
 
+## Configuration
+
+The following environment variables must be configured in the `.env` file created in the previous section:
+
+- **FLEX_APP_CUSTOMER_ROLE_SIDS**: Array of role SIDs that represent the customer role(s).
+- **FLEX_APP_STALE_THRESHOLD_SECONDS**: If the last message in the conversation was from an agent, the number of seconds before the chat is considered stale.
+- **FLEX_APP_URGENCY_THRESHOLD_SECONDS**: If the last message in the conversation was from the customer, the number of seconds before the chat is considered urgent.
+
+This plugin also supports the [Configuration API](https://www.twilio.com/docs/flex/developer/ui/configuration), allowing you to update settings without a new deploy/release of the plugin. Add the following object to the `ui_attributes` configuration object with your desired values:
+
+```
+"messaging_events": {
+    "stale_threshold_seconds": 360,  // overrides FLEX_APP_STALE_THRESHOLD_SECONDS
+    "urgency_threshold_seconds": 180 // overrides FLEX_APP_URGENCY_THRESHOLD_SECONDS
+}
+```
+
 ## Custom Actions
 
 This Twilio plugin adds support for two custom actions: `StaleAction` and `UrgencyAction`. Use the following event listeners to add custom code once the custom actions have been observed:
 
 ```
- Actions.addListener("afterStaleAction", () => {
-      // Add your custom action code here
-    });
+Actions.addListener("afterStaleAction", () => {
+    // Add your custom action code here
+});
 
-    Actions.addListener("afterUrgencyAction", () => {
-      // Add your custom action code here
-    });
+Actions.addListener("afterUrgencyAction", () => {
+    // Add your custom action code here
+});
 ```
 
 ## Development
