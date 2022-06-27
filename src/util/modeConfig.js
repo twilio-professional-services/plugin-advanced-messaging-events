@@ -1,6 +1,20 @@
 import * as Flex from "@twilio/flex-ui";
 import { ActionName, ChatMode } from "../enums";
 
+jest.mock('@twilio/flex-ui', () => {
+  return {
+    Manager: {
+      getInstance: () => {
+        return {
+          serviceConfiguration: {
+            ui_attributes: {}
+          }
+        }
+      }
+    }
+  }
+})
+
 const {
   messaging_events = {
     stale_threshold_seconds: process.env.FLEX_APP_STALE_THRESHOLD_SECONDS,
