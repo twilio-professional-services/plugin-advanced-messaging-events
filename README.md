@@ -1,6 +1,6 @@
 # Advanced Messaging Events Flex Plugin
 
-This plugin exposes actions which can be used to trigger functionality when it has been some time since the last chat message in a chat conversation. `StaleAction` is emitted when the most recent message was from an agent; `UrgencyAction` is emitted when the most recent message was from the customer. The threshold (time since last message) for a chat to be considered stale or urgent are configurable, as well as the role SID(s) representing the customer.
+This plugin exposes actions which can be used to trigger functionality when it has been some time since the last chat message in a chat conversation. `StaleMode` is emitted when the most recent message was from an agent; `UrgencyMode` is emitted when the most recent message was from the customer. The threshold (time since last message) for a chat to be considered stale or urgent are configurable, as well as the role SID(s) representing the customer.
 
 ## Installation
 
@@ -46,14 +46,14 @@ This plugin also supports the [Configuration API](https://www.twilio.com/docs/fl
 
 ## Custom Actions
 
-This Twilio plugin adds support for two custom actions: `StaleAction` and `UrgencyAction`. Use the following event listeners to add custom code once the custom actions have been observed:
+This Twilio plugin adds support for two custom actions: `StaleMode` and `UrgencyMode`. Use the following event listeners to add custom code once the custom actions have been observed:
 
 ```
-Actions.addListener("afterStaleAction", () => {
+Actions.addListener("afterStaleMode", () => {
     // Add your custom action code here
 });
 
-Actions.addListener("afterUrgencyAction", () => {
+Actions.addListener("afterUrgencyMode", () => {
     // Add your custom action code here
 });
 ```
