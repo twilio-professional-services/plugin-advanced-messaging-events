@@ -1,30 +1,59 @@
 # Advanced Messaging Events Flex Plugin
 
-This plugin exposes actions which can be used to trigger functionality when it has been some time since the last chat message in a chat conversation. `StaleMode` is emitted when the most recent message was from an agent; `UrgencyMode` is emitted when the most recent message was from the customer. The threshold (time since last message) for a chat to be considered stale or urgent are configurable, as well as the role SID(s) representing the customer.
+This plugin exposes actions which can be used to trigger functionality when it has been some time since the last chat message in a chat conversation, such as SMS or web chat. `MessageStaleMode` is emitted when the most recent message was from an agent; `MessageUrgencyMode` is emitted when the most recent message was from the customer. The threshold (time since last message) for a chat to be considered stale or urgent are configurable, as well as the role SID(s) representing the customer.
 
-## Installation
+## Disclaimer
 
-First, copy `.env.sample` to `.env` and make modifications per the instructions in that file.
+**This software is to be considered "sample code", a Type B Deliverable, and is delivered "as-is" to the user. Twilio bears no responsibility to support the use or implementation of this software.**
 
-Make sure you have [Node.js](https://nodejs.org) as well as [`npm`](https://npmjs.com). We support Node >= 10.12 (and recommend the _even_ versions of Node). Afterwards, install the dependencies by running `npm install`:
+## Pre-requisites
 
-```bash
-cd
+Make sure you have [Node.js](https://nodejs.org) as well as [`npm`](https://npmjs.com) installed.
 
-# If you use npm
-npm install
-```
-
-Next, please install the [Twilio CLI](https://www.twilio.com/docs/twilio-cli/quickstart) by running:
+Next, please install the [Twilio CLI](https://www.twilio.com/docs/twilio-cli/quickstart). If you are using Homebrew on macOS, you can do so by running:
 
 ```bash
 brew tap twilio/brew && brew install twilio
 ```
 
-Finally, install the [Flex Plugin extension](https://github.com/twilio-labs/plugin-flex/tree/v1-beta) for the Twilio CLI:
+Finally, install the [Flex Plugin extension](https://www.twilio.com/docs/flex/developer/plugins/cli/install) for the Twilio CLI:
 
 ```bash
 twilio plugins:install @twilio-labs/plugin-flex
+```
+
+## Installation
+
+First, clone the repository and change to its directory:
+
+```bash
+git clone https://github.com/twilio-professional-services/plugin-advanced-messaging-events.git
+
+cd plugin-advanced-messaging-events
+```
+
+Then, copy `.env.sample` to `.env` and make modifications per the instructions in that file.
+
+```bash
+cp .env.sample .env
+```
+
+Copy `public/appConfig.example.js` to `public/appConfig.js`:
+
+```bash
+cp public/appConfig.example.js public/appConfig.js
+```
+
+Install the dependencies:
+
+```bash
+npm install
+```
+
+Run the plugin locally:
+
+```bash
+twilio flex:plugins:start
 ```
 
 ## Configuration
@@ -46,14 +75,18 @@ This plugin also supports the [Configuration API](https://www.twilio.com/docs/fl
 
 ## Custom Actions
 
-This Twilio plugin adds support for two custom actions: `StaleMode` and `UrgencyMode`. Use the following event listeners to add custom code once the custom actions have been observed:
+This Twilio plugin adds support for three custom actions: `MessageDefaultMode`, `MessageStaleMode`, and `MessageUrgencyMode`. The `payload` parameter includes contextual information regarding the task and channel that triggered the action. Use the following event listeners to add custom code once the custom actions have been observed:
 
 ```
-Actions.addListener("afterStaleMode", () => {
+flex.Actions.addListener("afterMessageDefaultMode", (payload) => {
     // Add your custom action code here
 });
 
-Actions.addListener("afterUrgencyMode", () => {
+flex.Actions.addListener("afterMessageStaleMode", (payload) => {
+    // Add your custom action code here
+});
+
+flex.Actions.addListener("afterMessageUrgencyMode", (payload) => {
     // Add your custom action code here
 });
 ```

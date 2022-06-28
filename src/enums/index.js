@@ -1,6 +1,7 @@
 export const ActionName = {
-	urgency: "UrgencyMode",
-	stale: "StaleMode"
+	default: "MessageDefaultMode",
+	urgency: "MessageUrgencyMode",
+	stale: "MessageStaleMode"
 };
 
 export const ChatMode = {

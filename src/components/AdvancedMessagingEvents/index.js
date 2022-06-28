@@ -6,7 +6,7 @@ import { modeConfig } from '../../util/modeConfig';
 import { ChatMode } from '../../enums';
 
 function AdvancedMessagingEvents(props) {
-    const [chatMode, setChatMode] = useState(ChatMode.default);
+    const [chatMode, setChatMode] = useState(null);
     const [clock, setClock] = useState(true);
 
     // useEffect with [] param should behave as ComponentDidMount
@@ -32,9 +32,8 @@ function AdvancedMessagingEvents(props) {
     }, [clock])
 
     // useEffect with [chatMode] param should behave as ComponentDidUpdate, but should run only if chatMode have been updated
-    // Here we check if the new Mode is not the Default, since only Urgent and Stale mode should fire an Action
     useEffect(() => {
-        if (chatMode != ChatMode.default) {
+        if (chatMode) {
             Flex.Actions.invokeAction(modeConfig[chatMode].actionName, { task: props.task, channel: props.chatChannel })
         }
     }, [chatMode])
