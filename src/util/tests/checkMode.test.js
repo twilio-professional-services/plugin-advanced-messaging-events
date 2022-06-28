@@ -3,6 +3,20 @@ import { modeConfig } from '../modeConfig';
 import { ChatMode } from '../../enums';
 import testData from './testData';
 
+jest.mock('@twilio/flex-ui', () => {
+  return {
+	Manager: {
+	  getInstance: () => {
+		return {
+		  serviceConfiguration: {
+			ui_attributes: {}
+		  }
+		}
+	  }
+	}
+  }
+})
+
 test ('no message', () => {
 	let message = {
 		keyMessage: null,
