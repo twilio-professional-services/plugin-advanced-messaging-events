@@ -75,18 +75,18 @@ This plugin also supports the [Configuration API](https://www.twilio.com/docs/fl
 
 ## Custom Actions
 
-This Twilio plugin adds support for three custom actions: `MessageDefaultMode`, `MessageStaleMode`, and `MessageUrgencyMode`. Use the following event listeners to add custom code once the custom actions have been observed:
+This Twilio plugin adds support for three custom actions: `MessageDefaultMode`, `MessageStaleMode`, and `MessageUrgencyMode`. The `payload` parameter includes contextual information regarding the task and channel that triggered the action. Use the following event listeners to add custom code once the custom actions have been observed:
 
 ```
-Actions.addListener("afterMessageDefaultMode", () => {
+flex.Actions.addListener("afterMessageDefaultMode", (payload) => {
     // Add your custom action code here
 });
 
-Actions.addListener("afterMessageStaleMode", () => {
+flex.Actions.addListener("afterMessageStaleMode", (payload) => {
     // Add your custom action code here
 });
 
-Actions.addListener("afterMessageUrgencyMode", () => {
+flex.Actions.addListener("afterMessageUrgencyMode", (payload) => {
     // Add your custom action code here
 });
 ```
