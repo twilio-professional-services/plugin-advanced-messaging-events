@@ -91,6 +91,18 @@ flex.Actions.addListener("afterMessageUrgencyMode", (payload) => {
 });
 ```
 
+## Notable Features
+
+This plugin has a few specific features intended to account for some of the more common edge cases that may be encountered.
+
+### Key Message
+
+Actions emitted by this plugin are based on the _key message_. Consider the scenario where a customer sends a message, waits a minute, then sends another message, without the agent sending a message in between. In this scenario, we would want to use the first of these two messages when determining when to enter urgency mode--otherwise the customer could unintentionally prevent the chat from entering urgency mode. This is the key message--the first message _in a group of messages_ sent by the same chat member who sent the latest message. The key message changes whenever a different member sends a chat message.
+
+### Role Detection
+
+When configuring this plugin, the customer role SID(s) must be entered. This allows uniquely identifying the customer in a chat conversation when there are more than two participants, such as with [chat transfer](https://github.com/twilio-professional-services/plugin-chat-sms-transfer). The plugin will consider any participant with a role SID not within the array of customer role SIDs to be an internal participant. This prevents the plugin from emitting the wrong type of event in a transfer scenario.
+
 ## Development
 
 Run `twilio flex:plugins --help` to see all the commands we currently support. For further details on Flex Plugins refer to our documentation on the [Twilio Docs](https://www.twilio.com/docs/flex/developer/plugins/cli) page.
