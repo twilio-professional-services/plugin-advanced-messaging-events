@@ -3,7 +3,6 @@ import * as Flex from '@twilio/flex-ui';
 import { checkMode } from '../../util/checkMode';
 import { getKeyMessage } from '../../util/getKeyMessage';
 import { modeConfig } from '../../util/modeConfig';
-import { ChatMode } from '../../enums';
 
 function AdvancedMessagingEvents(props) {
     const [chatMode, setChatMode] = useState(null);
