@@ -36,6 +36,12 @@ export const isCustomerMessage = (message, members, config = {}) => {
     if (customerRoleSids.includes(authorRoleSid)) {
       return true;
     }
+    
+    // if we didn't match above, and are not missing any information,
+    // this message is internal
+    if (authorRoleSid && customerRoleSids.length > 0) {
+      return false;
+    }
   }
 
   // fallback again to `isFromMe` if `member_type` is undefined
