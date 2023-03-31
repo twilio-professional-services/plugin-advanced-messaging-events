@@ -19,9 +19,9 @@ function AdvancedMessagingEvents(props) {
     }, [])
 
     useEffect(() => {
-        if (!props.chatChannel) { return; }
+        if (!props.conversation) { return; }
         
-        const message = getKeyMessage(props.chatChannel.messages, props.chatChannel.members)
+        const message = getKeyMessage(props.conversation.messages, props.conversation.participants)
         
         if (!message.keyMessage) { return; }
         
@@ -33,7 +33,7 @@ function AdvancedMessagingEvents(props) {
     // useEffect with [chatMode] param should behave as ComponentDidUpdate, but should run only if chatMode have been updated
     useEffect(() => {
         if (chatMode) {
-            Flex.Actions.invokeAction(modeConfig[chatMode].actionName, { task: props.task, channel: props.chatChannel })
+            Flex.Actions.invokeAction(modeConfig[chatMode].actionName, { task: props.task, channel: props.conversation })
         }
     }, [chatMode])
 
