@@ -7,15 +7,15 @@
     "postinstall": "flex-plugin pre-script-check"
   },
   "dependencies": {
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "@twilio/flex-plugin-scripts": "5.1.2"
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "@twilio/flex-plugin-scripts": "6.0.3"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
-    "@twilio/flex-ui": "^1",
+    "@twilio/flex-ui": "^2",
     "jest": "^28.1.0",
-    "react-test-renderer": "16.13.1"
+    "react-test-renderer": "17.0.2"
   }
 }

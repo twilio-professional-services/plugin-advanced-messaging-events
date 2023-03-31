@@ -2,6 +2,8 @@
 
 This plugin exposes actions which can be used to trigger functionality when it has been some time since the last chat message in a chat conversation, such as SMS or web chat. `MessageStaleMode` is emitted when the most recent message was from an agent; `MessageUrgencyMode` is emitted when the most recent message was from the customer. The threshold (time since last message) for a chat to be considered stale or urgent are configurable, as well as the role SID(s) representing the customer.
 
+**For the Flex UI 1.x version of this plugin, see [the flex-ui-1 branch](https://github.com/twilio-professional-services/plugin-advanced-messaging-events/tree/flex-ui-1).**
+
 ## Disclaimer
 
 **This software is to be considered "sample code", a Type B Deliverable, and is delivered "as-is" to the user. Twilio bears no responsibility to support the use or implementation of this software.**
